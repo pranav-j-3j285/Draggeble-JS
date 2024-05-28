@@ -1,58 +1,114 @@
-<h1>{{title}}</h1>
-
+<h1>{{ title }}</h1>
 
 <div class="flex gap-5 flex-wrap">
   <div class="example-container">
-      <div class="example-list bg-transparent border-none flex justify-content-between align-items-center">
-        <h2 style="border-bottom: 3px solid; border-radius: 18%;">To do</h2>
-        <div class="example-form">
-          <mat-form-field class="example-full-width">
-            <mat-label>To Do</mat-label>
-            <input matInput #inputTodo (keyup.enter)="isEditing ? editItemIntoArray(inputTodo?.value, todo) : addItemIntoArray(inputTodo?.value, todo); inputTodo.value = ''">
-          </mat-form-field>
-          <!-- <button mat-raised-button color="primary" >Add</button> -->
-        </div>
-      </div>
-      <!-- [ngClass]="{ editing: isEditing }" -->
-      <div
-        cdkDropList
-        #todoList="cdkDropList"
-        [cdkDropListData]="todo"
-        [cdkDropListConnectedTo]="[doneList]"
-        class="example-list"
-        (cdkDropListDropped)="drop($event)">
-        <div class="example-box" *ngFor="let item of todo; index as i" cdkDrag (dblclick)="editItemIntoWeb(item, i, inputTodo)">
-          {{item}}
-          <div class="close" (click)="removeItemFromArray(i, todo)">X</div>
-        </div>
+    <div
+      class="example-list bg-transparent border-none flex justify-content-between align-items-center"
+    >
+      <h2 style="border-bottom: 3px solid; border-radius: 18%">To do</h2>
+      <div class="example-form">
+        <mat-form-field class="example-full-width">
+          <mat-label>To Do </mat-label>
+          <input
+            matInput
+            #inputTodo
+            (keyup.enter)="
+              isEditing
+                ? editItemIntoArray(inputTodo?.value, todo)
+                : addItemIntoArray(inputTodo?.value, todo);
+              inputTodo.value = ''
+            "
+          />
+        </mat-form-field>
       </div>
     </div>
-    <br>
-    <div class="example-container">
-      <div class="example-list bg-transparent border-none flex justify-content-between align-items-center">
-        <h2 style="border-bottom: 3px solid; border-radius: 18%;">Done</h2>
-        <div class="example-form">
-          <mat-form-field class="example-full-width">
-            <mat-label>Done</mat-label>
-            <input matInput #inputDone (keyup.enter)="isEditing ? editItemIntoArray(inputDone?.value, done) : addItemIntoArray(inputDone?.value, done); inputDone.value = ''">
-          </mat-form-field>
-          <!-- <button mat-raised-button color="primary" >Add</button> -->
-        </div>
-      </div>
-  
+    <div
+      cdkDropList
+      #todoList="cdkDropList"
+      [cdkDropListData]="todo"
+      [cdkDropListConnectedTo]="[doneList]"
+      class="example-list"
+      (cdkDropListDropped)="drop($event)"
+    >
       <div
-        cdkDropList
-        #doneList="cdkDropList"
-        [cdkDropListData]="done"
-        [cdkDropListConnectedTo]="[todoList]"
-        class="example-list"
-        (cdkDropListDropped)="drop($event)">
-        <div class="example-box" *ngFor="let item of done; index as i;" cdkDrag (dblclick)="editItemIntoWeb(item, i, inputDone)">
-          {{item}} 
-          <div class="close" (click)="removeItemFromArray(i, done)">X</div> 
-        </div>
+        class="example-box"
+        *ngFor="let item of todo; index as i"
+        cdkDrag
+        (dblclick)="editItemIntoWeb(item, i, inputTodo)"
+      >
+        {{ item }}
+        <div class="close" (click)="removeItemFromArray(i, todo)">X</div>
       </div>
+    </div>
+  </div>
+  <br />
+  <div class="example-container">
+    <div
+      class="example-list bg-transparent border-none flex justify-content-between align-items-center"
+    >
+      <h2 style="border-bottom: 3px solid; border-radius: 18%">Done</h2>
+      <div class="example-form">
+        <mat-form-field class="example-full-width">
+          <mat-label>Done</mat-label>
+          <input
+            matInput
+            #inputDone
+            (keyup.enter)="
+              isEditing
+                ? editItemIntoArray(inputDone?.value, done)
+                : addItemIntoArray(inputDone?.value, done);
+              inputDone.value = ''
+            "
+          />
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div
+      cdkDropList
+      #doneList="cdkDropList"
+      [cdkDropListData]="done"
+      [cdkDropListConnectedTo]="[todoList]"
+      class="example-list"
+      (cdkDropListDropped)="drop($event)"
+    >
+      <div
+        class="example-box"
+        *ngFor="let item of done; index as i"
+        cdkDrag
+        (dblclick)="editItemIntoWeb(item, i, inputDone)"
+      >
+        {{ item }}
+        <div class="close" (click)="removeItemFromArray(i, done)">X</div>
+      </div>
+    </div>
   </div>
 </div>
-  
-  
+
+<div class="example-container">
+  <h2>To do</h2>
+  <div
+    cdkDropList
+    #todoList="cdkDropList"
+    [cdkDropListData]="todo"
+    [cdkDropListConnectedTo]="[doneList]"
+    class="example-list"
+    (cdkDropListDropped)="drop($event)"
+  >
+    <div class="example-box" *ngFor="let item of todo" cdkDrag>{{ item }}</div>
+  </div>
+</div>
+
+<div class="example-container">
+  <h2>Done</h2>
+  <div
+    cdkDropList
+    #doneList="cdkDropList"
+    [cdkDropListData]="done"
+    [cdkDropListConnectedTo]="[todoList]"
+    class="example-list"
+    (cdkDropListDropped)="drop($event)"
+  >
+    <div class="example-box" *ngFor="let item of done" cdkDrag>{{ item }}</div>
+  </div>
+</div>
